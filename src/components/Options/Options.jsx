@@ -1,22 +1,16 @@
 import styles from "./Options.module.css";
 
-const Options = ({
-  updateFeedbackGood,
-  updateFeedbackNeutral,
-  updateFeedbackBad,
-  resetFeedback,
-  totalFeedback,
-}) => {
-  const { options, isHidden, isShown } = styles;
+const Options = ({ updateFeedback, resetFeedback, totalFeedback }) => {
+  const { options, isHidden } = styles;
 
   return (
     <div className={options}>
-      <button onClick={updateFeedbackGood}>Good</button>
-      <button onClick={updateFeedbackNeutral}>Neutral</button>
-      <button onClick={updateFeedbackBad}>Bad</button>
+      <button onClick={() => updateFeedback("good")}>Good</button>
+      <button onClick={() => updateFeedback("neutral")}>Neutral</button>
+      <button onClick={() => updateFeedback("bad")}>Bad</button>
 
       <button
-        className={totalFeedback === 0 ? isHidden : isShown}
+        className={totalFeedback === 0 ? isHidden : ""}
         onClick={resetFeedback}
       >
         Reset

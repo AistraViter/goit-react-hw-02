@@ -34,9 +34,7 @@ export default function App() {
     <>
       <Description />
       <Options
-        updateFeedbackGood={() => updateFeedback("good")}
-        updateFeedbackNeutral={() => updateFeedback("neutral")}
-        updateFeedbackBad={() => updateFeedback("bad")}
+        updateFeedback={updateFeedback}
         resetFeedback={resetFeedback}
         totalFeedback={totalFeedback}
       />
