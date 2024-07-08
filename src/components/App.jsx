@@ -50,7 +50,7 @@ export default function App() {
         updateFeedbackNeutral={updateFeedbackNeutral}
         updateFeedbackBad={updateFeedbackBad}
         resetFeedback={resetFeedback}
-        totalFeedback={totalFeedback}  // Передаємо totalFeedback
+        totalFeedback={totalFeedback} // Передаємо totalFeedback
       />
       <IsFeedback totalFeedback={totalFeedback} feedback={feedback} />
     </>
@@ -58,12 +58,15 @@ export default function App() {
 }
 
 const IsFeedback = ({ totalFeedback, feedback }) => {
+  const positiveFeedback = Math.round((feedback.good / totalFeedback) * 100);
   if (totalFeedback > 0) {
     return (
       <Feedback
         good={feedback.good}
         neutral={feedback.neutral}
         bad={feedback.bad}
+        total={totalFeedback}
+        positive={positiveFeedback}
       />
     );
   }
