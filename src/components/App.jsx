@@ -1,11 +1,54 @@
+import { useState } from "react";
+import Description from "./Description/Description";
+import Options from "./Options/Options";
+import Feedback from "./Feedback/Feedback";
+
+export default function App() {
+  const [feedback, setFeedback] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  });
+
+  const updateFeedbackGood = () => {
+    setFeedback((prevFeedback) => ({
+      ...prevFeedback,
+      good: prevFeedback.good + 1,
+    }));
+  };
+
+  const updateFeedbackNeutral = () => {
+    setFeedback((prevFeedback) => ({
+      ...prevFeedback,
+      neutral: prevFeedback.neutral + 1,
+    }));
+  };
+
+  const updateFeedbackBad = () => {
+    setFeedback((prevFeedback) => ({
+      ...prevFeedback,
+      bad: prevFeedback.bad + 1,
+    }));
+  };
 
 
-function App() {
 
   return (
     <>
+      <Description />
+      <Options 
+      updateFeedbackGood={updateFeedbackGood}
+      updateFeedbackNeutral={updateFeedbackNeutral}
+      updateFeedbackBad={updateFeedbackBad}
+      />
+      <Feedback
+        good={feedback.good}
+        neutral={feedback.neutral}
+        bad={feedback.bad}
+      />
     </>
-  )
+  );
 }
 
-export default App
+
+
