@@ -14,7 +14,11 @@ const Options = ({
       <button onClick={updateFeedbackGood}>Good</button>
       <button onClick={updateFeedbackNeutral}>Neutral</button>
       <button onClick={updateFeedbackBad}>Bad</button>
-      <button className={ totalFeedback ===0? isHidden : isShown } onClick={resetFeedback}>
+
+      <button
+        className={totalFeedback === 0 ? isHidden : isShown}
+        onClick={resetFeedback}
+      >
         Reset
       </button>
     </div>
@@ -22,5 +26,3 @@ const Options = ({
 };
 
 export default Options;
-
-

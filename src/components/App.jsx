@@ -11,24 +11,10 @@ export default function App() {
     bad: 0,
   });
 
-  const updateFeedbackGood = () => {
+  const updateFeedback = (type) => {
     setFeedback((prevFeedback) => ({
       ...prevFeedback,
-      good: prevFeedback.good + 1,
-    }));
-  };
-
-  const updateFeedbackNeutral = () => {
-    setFeedback((prevFeedback) => ({
-      ...prevFeedback,
-      neutral: prevFeedback.neutral + 1,
-    }));
-  };
-
-  const updateFeedbackBad = () => {
-    setFeedback((prevFeedback) => ({
-      ...prevFeedback,
-      bad: prevFeedback.bad + 1,
+      [type]: prevFeedback[type] + 1,
     }));
   };
 
@@ -41,34 +27,30 @@ export default function App() {
   };
 
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+  const positiveFeedback =
+    totalFeedback > 0 ? Math.round((feedback.good / totalFeedback) * 100) : 0;
 
   return (
     <>
       <Description />
       <Options
-        updateFeedbackGood={updateFeedbackGood}
-        updateFeedbackNeutral={updateFeedbackNeutral}
-        updateFeedbackBad={updateFeedbackBad}
+        updateFeedbackGood={() => updateFeedback("good")}
+        updateFeedbackNeutral={() => updateFeedback("neutral")}
+        updateFeedbackBad={() => updateFeedback("bad")}
         resetFeedback={resetFeedback}
-        totalFeedback={totalFeedback} // Передаємо totalFeedback
+        totalFeedback={totalFeedback}
       />
-      <IsFeedback totalFeedback={totalFeedback} feedback={feedback} />
+      {totalFeedback > 0 ? (
+        <Feedback
+          good={feedback.good}
+          neutral={feedback.neutral}
+          bad={feedback.bad}
+          total={totalFeedback}
+          positive={positiveFeedback}
+        />
+      ) : (
+        <Notification />
+      )}
     </>
   );
 }
-
-const IsFeedback = ({ totalFeedback, feedback }) => {
-  const positiveFeedback = Math.round((feedback.good / totalFeedback) * 100);
-  if (totalFeedback > 0) {
-    return (
-      <Feedback
-        good={feedback.good}
-        neutral={feedback.neutral}
-        bad={feedback.bad}
-        total={totalFeedback}
-        positive={positiveFeedback}
-      />
-    );
-  }
-  return <Notification />;
-};
