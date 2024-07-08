@@ -2,6 +2,7 @@ import { useState } from "react";
 import Description from "./Description/Description";
 import Options from "./Options/Options";
 import Feedback from "./Feedback/Feedback";
+import Notification from "./Notification/Notification";
 
 export default function App() {
   const [feedback, setFeedback] = useState({
@@ -31,24 +32,30 @@ export default function App() {
     }));
   };
 
-
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
 
   return (
     <>
       <Description />
-      <Options 
-      updateFeedbackGood={updateFeedbackGood}
-      updateFeedbackNeutral={updateFeedbackNeutral}
-      updateFeedbackBad={updateFeedbackBad}
+      <Options
+        updateFeedbackGood={updateFeedbackGood}
+        updateFeedbackNeutral={updateFeedbackNeutral}
+        updateFeedbackBad={updateFeedbackBad}
       />
+      <IsFeedback totalFeedback={totalFeedback} feedback={feedback} />
+    </>
+  );
+}
+
+const IsFeedback = ({ totalFeedback, feedback }) => {
+  if (totalFeedback > 0) {
+    return (
       <Feedback
         good={feedback.good}
         neutral={feedback.neutral}
         bad={feedback.bad}
       />
-    </>
-  );
-}
-
-
-
+    );
+  }
+  return <Notification />;
+};
