@@ -50,6 +50,7 @@ export default function App() {
         updateFeedbackNeutral={updateFeedbackNeutral}
         updateFeedbackBad={updateFeedbackBad}
         resetFeedback={resetFeedback}
+        totalFeedback={totalFeedback}  // Передаємо totalFeedback
       />
       <IsFeedback totalFeedback={totalFeedback} feedback={feedback} />
     </>

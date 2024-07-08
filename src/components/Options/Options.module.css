@@ -11,3 +11,11 @@
   border: 2px solid black;
   border-radius: 4px;
 }
+
+.options button.isHidden {
+  display: none;
+}
+
+.options button.isShown {
+  display: block;
+}
